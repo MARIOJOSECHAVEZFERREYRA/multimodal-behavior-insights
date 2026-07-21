@@ -40,20 +40,47 @@ bool/label, so it can be unit tested with fixture landmarks — no video or came
 
 ## Modalities
 
-| Modality | Source | Status |
-|----------|--------|--------|
-| Body posture | MediaPipe Pose landmarks | Implemented in sample (subset of rules) |
-| Hand gestures | MediaPipe Hands landmarks | Implemented in sample (subset of rules) |
-| Head movement | MediaPipe Pose (ear/nose landmarks) | Partial — only basic tilt/down detection |
-| Facial micro-expressions | MediaPipe Face Landmarker | Not yet implemented |
+| Modality | Source | Mid-term | Final deliverable |
+|----------|--------|----------|--------------------|
+| Body posture | MediaPipe Pose landmarks | In scope (subset of rules) | Extended rule set |
+| Hand gestures | MediaPipe Hands landmarks | In scope (subset of rules) | Extended rule set |
+| Head movement | MediaPipe Pose (ear/nose landmarks) | In scope (basic tilt/down) | Extended rule set |
+| Facial micro-expressions | MediaPipe Face Landmarker | Out of scope | Required |
 
-## Taxonomy Scope
+## Taxonomy Scope (confirmed with course reviewer, 2026-07-21)
 
-The case spec calls for a taxonomy of 40 postures/gestures with psychological meanings; the
-sample implements 10. The final taxonomy size and how the remaining rules get authored
-(manual geometric rules vs. a learned classifier) is an open scope decision — track it in a
-GitHub issue before starting implementation so the taxonomy table and detection rules stay in
-sync.
+The case spec calls for a taxonomy of 40 postures/gestures with psychological meanings. Scope
+was confirmed in two phases:
+
+**Mid-term:** 10 foundational postures/gestures, rule-based, no training data required:
+`arms_crossed`, `touching_ear`, `touching_hair`, `hand_on_chin`, `open_arms`,
+`hands_clasped`, `head_down`, `head_tilted`, `hand_behind_head`, `fidgeting` — this matches
+the taxonomy already in the sample script.
+
+**Final deliverable:** extend toward the full 40 via scenario-specific rules layered onto the
+same geometric-rule approach (distances/angles between MediaPipe keypoints), plus facial
+micro-expression detection (MediaPipe Face Landmarker) which is required for the final
+submission but explicitly out of scope for mid-term.
+
+## Classification Approach (confirmed)
+
+Heuristic/rule-based classification using MediaPipe pose keypoint distances and angles —
+no training data or ML model required. A trained ML classifier remains an acceptable
+alternative per the course reviewer's guidance, but is not the current plan; revisit only if
+the rule-based approach proves insufficient for the extended taxonomy.
+
+## Dataset (confirmed)
+
+No suitable public dataset exists for this task. The team records its own mock interview
+videos (3–5 sessions, ~5 minutes each) to use as demo/test input. These are working data, not
+committed to the repo (see [DELIVERY_STANDARDS.md](DELIVERY_STANDARDS.md)) — store them
+locally or in a separate (non-git) location and reference them by path in local testing.
+
+## Demo Format (confirmed)
+
+A locally runnable Streamlit app is sufficient, accompanied by a pre-recorded demo video for
+submission. Public deployment (e.g. Streamlit Community Cloud) is a stretch goal, attempted
+only if time permits — not required for mid-term or final.
 
 ## Data Flow Detail
 
