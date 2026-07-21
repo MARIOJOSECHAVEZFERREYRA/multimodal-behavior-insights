@@ -1,0 +1,10 @@
+{
+  "source": "develop",
+  "branchName": "${issue.number}-${issue.title}",
+  "branches": [
+    { "label": "bug", "prefix": "fix/" },
+    { "label": "feature", "prefix": "feature/" },
+    { "label": "documentation", "prefix": "docs/" }
+  ],
+  "defaultBranch": { "prefix": "chore/" }
+}
