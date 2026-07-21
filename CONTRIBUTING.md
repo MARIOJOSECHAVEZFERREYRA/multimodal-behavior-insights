@@ -125,6 +125,11 @@ docs(readme): document OPENAI_API_KEY setup
 - Tests included for new detection rules or taxonomy entries
 - Call out any known limitations (e.g. thresholds tuned on a specific camera framing)
 
+If you're using Claude Code in this repository, the project-local `/to-pr` skill can walk the
+PR workflow for you: it runs `ruff`/`black`/`pytest`, suggests a commit message following this
+repo's single-line convention, targets `develop`, and opens a draft PR using
+`.github/PULL_REQUEST_TEMPLATE.md`. It does not create commits or push branches.
+
 ## Issue Tracking
 
 - Use GitHub Issues for bugs and feature ideas
