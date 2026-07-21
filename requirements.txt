@@ -1,0 +1,6 @@
+mediapipe==0.10.14
+streamlit==1.30.0
+openai==1.12.0
+opencv-python==4.9.0.0
+numpy
+python-dotenv
