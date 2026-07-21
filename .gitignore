@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Video/media artifacts (may contain identifiable people — never commit)
+*.mp4
+*.mov
+*.avi
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
