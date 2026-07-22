@@ -38,7 +38,7 @@ class HolisticDetector:
     def close(self) -> None:
         self._holistic.close()
 
-    def __enter__(self) -> "HolisticDetector":
+    def __enter__(self) -> HolisticDetector:
         return self
 
     def __exit__(self, *exc_info: object) -> None:

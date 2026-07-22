@@ -9,7 +9,7 @@ import cv2
 
 def sampled_frames(
     video_path: str, every_n: int = 10
-) -> Iterator[tuple[int, float, "cv2.typing.MatLike"]]:
+) -> Iterator[tuple[int, float, cv2.typing.MatLike]]:
     """Yield (frame_index, timestamp_sec, frame) for every Nth frame of the video."""
     cap = cv2.VideoCapture(video_path)
     fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
