@@ -15,14 +15,14 @@ Quality expectations for contributions to this repo. Every PR should meet these 
 ## Testing
 
 - [ ] New posture/gesture rules have a unit test with fixture landmark data
-- [ ] LLM calls are mocked in tests — no live OpenAI calls in CI
+- [ ] LLM calls are mocked in tests — no live Gemini calls in CI
 - [ ] `pytest` passes locally
 - See [TESTING.md](TESTING.md) for structure and fixture patterns
 
 ## Security & Secrets
 
 - [ ] No API keys or tokens committed, including as a fallback default (e.g. never
-      `st.secrets.get("OPENAI_API_KEY", "sk-...")`)
+      `st.secrets.get("GEMINI_API_KEY", "AIza...")`)
 - [ ] `.env` stays git-ignored; only `.env.example` (blank) is tracked
 - [ ] Uploaded video temp files are deleted after processing (`os.unlink` / `tempfile` cleanup)
 - [ ] No sample/test videos containing real, identifiable people are committed to the repo

@@ -1,25 +1,26 @@
-"""Aggregate detected postures into an LLM prompt and synthesize a narrative."""
+"""Aggregate detected postures into an LLM prompt and synthesize a narrative via Gemini."""
 
 from __future__ import annotations
 
 import os
 from collections import Counter
 
-from openai import OpenAI
+from google import genai
+from google.genai import types
 
 from src.taxonomy.meanings import POSTURE_MEANINGS
 
-_DEFAULT_MODEL = "gpt-4o-mini"
+_DEFAULT_MODEL = "gemini-2.5-flash"
 
 
-def _client() -> OpenAI:
-    api_key = os.environ.get("OPENAI_API_KEY")
+def _client() -> genai.Client:
+    api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise RuntimeError(
-            "OPENAI_API_KEY is not set. Copy .env.example to .env and add your key "
-            "(see docs/GETTING_STARTED.md)."
+            "GEMINI_API_KEY is not set. Copy .env.example to .env and add your key "
+            "(free tier, no card required — see docs/GETTING_STARTED.md)."
         )
-    return OpenAI(api_key=api_key)
+    return genai.Client(api_key=api_key)
 
 
 def _summary_lines(posture_counts: Counter) -> list[str]:
@@ -35,7 +36,7 @@ def _summary_lines(posture_counts: Counter) -> list[str]:
 
 
 def generate_narrative(
-    posture_counts: Counter, duration_sec: float, client: OpenAI | None = None
+    posture_counts: Counter, duration_sec: float, client: genai.Client | None = None
 ) -> str:
     """Synthesize a short psychological narrative from aggregated posture counts.
 
@@ -58,13 +59,12 @@ def generate_narrative(
 
     active_client = client or _client()
     try:
-        response = active_client.chat.completions.create(
+        response = active_client.models.generate_content(
             model=_DEFAULT_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=250,
-            temperature=0.7,
+            contents=prompt,
+            config=types.GenerateContentConfig(temperature=0.7, max_output_tokens=250),
         )
-        return response.choices[0].message.content
+        return response.text
     except Exception as exc:
         fallback = ", ".join(p.replace("_", " ") for p in posture_counts)
         return f"[LLM Error: {exc}] Fallback: The subject showed signs of {fallback}."
