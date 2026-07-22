@@ -26,9 +26,9 @@ Be respectful and constructive in all interactions, including in code review com
 
 ## API Keys & Secrets
 
-This project calls the OpenAI API to synthesize narratives. Never hardcode a key or use a
-placeholder fallback like `st.secrets.get("OPENAI_API_KEY", "YOUR_KEY_HERE")` — if the key is
-missing, fail loudly instead of silently running with a fake value.
+This project calls the Gemini API (Google AI Studio) to synthesize narratives. Never hardcode
+a key or use a placeholder fallback like `st.secrets.get("GEMINI_API_KEY", "YOUR_KEY_HERE")` —
+if the key is missing, fail loudly instead of silently running with a fake value.
 
 - Store your key in `.env` (local, git-ignored) or Streamlit's `secrets.toml` (also git-ignored)
 - Commit `.env.example` with a blank placeholder only
@@ -81,7 +81,7 @@ Follow the module boundaries defined in [docs/ARCHITECTURE.md](docs/ARCHITECTURE
 - Use `pytest`; place tests under `tests/`, mirroring the `src/` layout
 - Mock MediaPipe landmark results with fixture objects — don't require a real camera or video
   file in unit tests
-- Mock the OpenAI client in tests; never call the live API in CI
+- Mock the Gemini client in tests; never call the live API in CI
 - See [docs/TESTING.md](docs/TESTING.md) for the full structure and fixture patterns
 
 ## Commit Guidelines
@@ -108,7 +108,7 @@ feat(taxonomy): add rule for steepled fingers
 
 fix(hand-detection): guard against missing right_hand_landmarks
 
-docs(readme): document OPENAI_API_KEY setup
+docs(readme): document GEMINI_API_KEY setup
 ```
 
 ## Pull Request Process

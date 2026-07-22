@@ -30,7 +30,7 @@ src/
 ├── taxonomy/            # posture/gesture rules + meaning table
 │   ├── rules.py         # geometric rule functions (one per posture/gesture)
 │   └── meanings.py      # POSTURE_MEANINGS lookup table
-├── narrative/            # LLM prompt construction + OpenAI client call
+├── narrative/            # LLM prompt construction + Gemini client call
 └── export/               # JSON report shape
 app.py                   # Streamlit UI, wires the above together
 ```

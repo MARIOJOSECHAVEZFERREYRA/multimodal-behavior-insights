@@ -14,7 +14,7 @@ Quick guide to all project documentation.
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — Module boundaries, data flow, taxonomy design
 - **[DELIVERY_STANDARDS.md](DELIVERY_STANDARDS.md)** — Code quality, security, and
   responsible-use checklist for PRs
-- **[TESTING.md](TESTING.md)** — Test structure, fixtures, mocking MediaPipe/OpenAI
+- **[TESTING.md](TESTING.md)** — Test structure, fixtures, mocking MediaPipe/Gemini
 
 ## Common Questions → Answer Location
 
