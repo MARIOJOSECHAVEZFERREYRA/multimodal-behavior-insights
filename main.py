@@ -1,5 +1,3 @@
-
-
 import streamlit as st
 import cv2
 import mediapipe as mp
@@ -9,9 +7,6 @@ from openai import OpenAI
 import tempfile
 import os
 from dotenv import load_dotenv
-
-print(mp.__file__)
-
 
 load_dotenv()
 client = OpenAI(
