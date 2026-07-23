@@ -16,7 +16,7 @@ print(mp.__file__)
 load_dotenv()
 client = OpenAI(
     api_key=os.environ["OPENAI_API_KEY"],
-    base_url="https://api.deepseek.com/v1"  
+    base_url="https://open.bigmodel.cn/api/paas/v4/"
 )
 mp_holistic = mp.solutions.holistic
 
@@ -158,7 +158,7 @@ Write a concise 3-4 sentence psychological profile of the subject. Be speculativ
 
     try:
         r = client.chat.completions.create(
-            model="deepseek-chat",
+            model="glm-4-flash",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=250,
             temperature=0.7,
