@@ -1,10 +1,6 @@
-
-# requirements.txt
- mediapipe==0.10.9
- streamlit
- openai
- opencv-python
- numpy
- dotenv
-
- # python 3.11
+mediapipe==0.10.14
+streamlit==1.30.0
+google-genai==2.13.0
+opencv-python==4.9.0.0
+numpy
+python-dotenv

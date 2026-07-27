@@ -17,7 +17,8 @@ validated behavioral assessment tool.
 - **Python 3.11+** (check with `python3 --version`)
 - **pip** and **venv**
 - **Git**
-- An **OpenAI API key** (for narrative generation) — https://platform.openai.com/api-keys
+- A **Gemini API key** (for narrative generation) — free tier, no card required:
+  https://aistudio.google.com/apikey
 
 ## Step 1: Clone and Branch
 
@@ -50,7 +51,7 @@ cp .env.example .env
 Edit `.env`:
 
 ```env
-OPENAI_API_KEY=sk-your-key-here
+GEMINI_API_KEY=your-key-here
 ```
 
 Never commit `.env` — only `.env.example` (blank placeholder) is tracked.
@@ -94,7 +95,7 @@ specifically rather than the latest 3.12/3.13.
 Some MOV/AVI codecs aren't supported out of the box. Try re-exporting as H.264 MP4, or install
 the system `ffmpeg` package.
 
-### `OPENAI_API_KEY` not found
+### `GEMINI_API_KEY` not found
 Confirm `.env` exists (not just `.env.example`) and that your shell/Streamlit process picks it
 up — either via `python-dotenv` or Streamlit's `st.secrets`.
 

@@ -7,7 +7,7 @@
 | Geometric posture/gesture rule (e.g. `is_arms_crossed`) | Unit — fixture landmarks in, bool out |
 | Taxonomy label → meaning lookup | Unit |
 | Narrative prompt construction | Unit — assert prompt content, not LLM output |
-| `generate_narrative()` with the OpenAI client | Unit — mock `client.chat.completions.create` |
+| `generate_narrative()` with the Gemini client | Unit — mock `client.models.generate_content` |
 | Full pipeline (video in → JSON report out) | Integration — use a short fixture video, optional |
 
 ## Structure
@@ -47,14 +47,15 @@ under test, e.g. wrist/elbow positions for an `arms_crossed` test.
 
 ## Mocking the LLM
 
-Never call the live OpenAI API in tests. Mock `client.chat.completions.create` and assert:
+Never call the live Gemini API in tests. Mock `client.models.generate_content` and assert:
 - The prompt includes the expected posture summary lines
 - The function handles an API error gracefully (falls back instead of crashing)
 
 ```python
-def test_generate_narrative_falls_back_on_api_error(monkeypatch):
-    monkeypatch.setattr(client.chat.completions, "create", lambda **_: (_ for _ in ()).throw(RuntimeError("boom")))
-    result = generate_narrative(Counter({"touching_ear": 3}), duration_sec=30)
+def test_generate_narrative_falls_back_on_api_error():
+    client = MagicMock()
+    client.models.generate_content.side_effect = RuntimeError("boom")
+    result = generate_narrative(Counter({"touching_ear": 3}), duration_sec=30, client=client)
     assert "touching ear" in result.lower()
 ```
 
