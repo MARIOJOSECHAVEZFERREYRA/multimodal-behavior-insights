@@ -14,7 +14,7 @@ from src.capture.video import sampled_frames, video_duration_sec
 from src.detection.holistic import HolisticDetector
 from src.export.report import build_report, report_to_json
 from src.narrative.generator import generate_narrative
-from src.taxonomy.detector import HandState, detect_postures
+from src.taxonomy.detector import MotionState, detect_postures
 
 load_dotenv()
 
@@ -22,7 +22,7 @@ _mp_holistic = mp.solutions.holistic
 
 st.set_page_config(page_title="Psychological Behavior Analyzer", layout="wide")
 st.title("Psychological Behavior Analyzer")
-st.caption("Mid-term MVP: 10-posture rule-based detection + LLM narrative generation")
+st.caption("40-posture rule-based detection (body, hand, head) + LLM narrative generation")
 st.warning("Heuristic course demo — not a clinically validated behavioral assessment tool.")
 
 uploaded = st.file_uploader("Upload interview video (MP4/MOV/AVI)", type=["mp4", "mov", "avi"])
@@ -41,7 +41,7 @@ if uploaded:
 
         posture_timeline: list[tuple[float, str]] = []
         posture_counts: Counter = Counter()
-        prev_hands = HandState()
+        prev_state = MotionState()
 
         progress_bar = st.progress(0)
         frame_placeholder = st.empty()
@@ -49,8 +49,8 @@ if uploaded:
         with HolisticDetector() as detector:
             for frame_idx, timestamp, frame in sampled_frames(video_path, every_n=10):
                 detections = detector.process(frame)
-                labels, prev_hands = detect_postures(
-                    detections.pose, detections.left_hand, detections.right_hand, prev_hands
+                labels, prev_state = detect_postures(
+                    detections.pose, detections.left_hand, detections.right_hand, prev_state
                 )
                 for label in labels:
                     posture_timeline.append((timestamp, label))

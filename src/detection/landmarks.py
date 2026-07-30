@@ -31,6 +31,8 @@ class PoseFrame:
     right_eye: Point
     mouth_left: Point
     mouth_right: Point
+    left_hip: Point
+    right_hip: Point
 
 
 @dataclass(frozen=True)
@@ -65,6 +67,8 @@ def extract_pose_frame(pose_landmarks: Any, width: int, height: int) -> PoseFram
         right_eye=_xy(lm[pl.RIGHT_EYE], width, height),
         mouth_left=_xy(lm[pl.MOUTH_LEFT], width, height),
         mouth_right=_xy(lm[pl.MOUTH_RIGHT], width, height),
+        left_hip=_xy(lm[pl.LEFT_HIP], width, height),
+        right_hip=_xy(lm[pl.RIGHT_HIP], width, height),
     )
 
 

@@ -42,10 +42,10 @@ bool/label, so it can be unit tested with fixture landmarks — no video or came
 
 | Modality | Source | Mid-term | Final deliverable |
 |----------|--------|----------|--------------------|
-| Body posture | MediaPipe Pose landmarks | In scope (subset of rules) | Extended rule set |
-| Hand gestures | MediaPipe Hands landmarks | In scope (subset of rules) | Extended rule set |
-| Head movement | MediaPipe Pose (ear/nose landmarks) | In scope (basic tilt/down) | Extended rule set |
-| Facial micro-expressions | MediaPipe Face Landmarker | Out of scope | Required |
+| Body posture | MediaPipe Pose landmarks | In scope (subset of rules) | Extended rule set — done (issue #10) |
+| Hand gestures | MediaPipe Hands landmarks | In scope (subset of rules) | Extended rule set — done (issue #10) |
+| Head movement | MediaPipe Pose (ear/nose landmarks) | In scope (basic tilt/down) | Extended rule set — done (issue #10) |
+| Facial micro-expressions | MediaPipe Face Landmarker | Out of scope | Required — not started |
 
 ## Taxonomy Scope (confirmed with course reviewer, 2026-07-21)
 
@@ -61,6 +61,16 @@ the taxonomy already in the sample script.
 same geometric-rule approach (distances/angles between MediaPipe keypoints), plus facial
 micro-expression detection (MediaPipe Face Landmarker) which is required for the final
 submission but explicitly out of scope for mid-term.
+
+**Extended taxonomy (done, issue #10):** the body posture/hand gesture/head movement portion
+of the full 40 is implemented in `src/taxonomy/rules.py` and `src/taxonomy/meanings.py` — 11
+body posture rules (e.g. `arms_akimbo`, `body_leaning_sideways`, `torso_turned`), 13 hand
+gesture rules (e.g. `touching_nose`, `pointing_gesture`, `rubbing_hands`), and 6 head movement
+rules (e.g. `head_averted`, `head_nodding`, `head_shaking`), on top of the original 10. This
+required extending `PoseFrame` with hip landmarks and adding a `MotionState` (previously
+`HandState`) that also tracks the previous nose position, since several new rules (nodding,
+shaking, rubbing hands, waving) are motion-based rather than single-frame. Facial
+micro-expressions remain the one outstanding piece for the full 40 and are not started.
 
 ## Classification Approach (confirmed)
 
